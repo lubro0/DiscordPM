@@ -16,6 +16,8 @@ class Main extends PluginBase {
         $config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
         $discordToken = $config->get("DISCORD_BOT_TOKEN");
 
+        $this->installDiscordPHP();
+
         $this->discord = new Discord([
             'token' => $discordToken,
         ]);
@@ -23,7 +25,7 @@ class Main extends PluginBase {
         $this->discord->on('READY', function ($discord) {
             $discord->getGateway()->on('MESSAGE_CREATE', function ($message) {
                 if ($message->content === "!ping") {
-                    $message->channel->sendMessage("Pong!");
+                    $message->channel->sendMessage("Pong! 🏓");
                 }
             });
         });
@@ -45,5 +47,18 @@ class Main extends PluginBase {
     public function executeDiscordCommand(): void {
         $channel = $this->discord->getChannel('DISCORD_CHANNEL_ID');
         $channel->sendMessage("Eine Nachricht von Minecraft!");
+    }
+
+    public function runComposerCommand(string $command): void {
+        $output = shell_exec("composer $command");
+        if ($output) {
+            $this->getLogger()->info("Composer Output: " . $output);
+        } else {
+            $this->getLogger()->warning("Composer-Befehl fehlgeschlagen.");
+        }
+    }
+
+    public function installDiscordPHP(): void {
+        $this->runComposerCommand('require team-reflex/discord-php');
     }
 }

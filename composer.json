@@ -1,15 +1,9 @@
 {
-  "name": "lubro0/discordpm",
-  "description": "---",
-  "type": "project",
-  "require": {
-    "php": "^5.6",
-    "pmmp/raklib": "^1.0",
-    "team-reflex/discord-php": "^7.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "lubro0\\DiscordPM\\": "src/"
+    "name": "lubro0/DiscordPM",
+    "description": "Discord bot using discord-php",
+    "version": "1.0.0",
+    "require": {
+        "php": "^7.1",
+        "team-reflex/discord-php": "^7.0"
     }
-  }
 }

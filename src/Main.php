@@ -5,6 +5,8 @@ namespace lubro0\DiscordPM;
 use Discord\Discord;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\command\Command;
+use pocketmine\command\CommandSender;
 
 class Main extends PluginBase {
 
@@ -30,5 +32,18 @@ class Main extends PluginBase {
     }
 
     public function onDisable(): void {
+    }
+
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+        if ($command->getName() === "discordpm") {
+            $this->executeDiscordCommand();
+            return true;
+        }
+        return false;
+    }
+
+    public function executeDiscordCommand(): void {
+        $channel = $this->discord->getChannel('DISCORD_CHANNEL_ID');
+        $channel->sendMessage("Eine Nachricht von Minecraft!");
     }
 }

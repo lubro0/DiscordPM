@@ -1,0 +1,5 @@
+name: DiscordPM
+version: 1.0.0
+main: lubro0\DiscordPM\Main
+api: 5.0.0
+src-namespace-prefix: lubro0\DiscordPM
